@@ -4,15 +4,12 @@ Software for analysis and visualization of Memory Access Pattern (MAP)
 MAPvisual is a tool that creates and combines memory tracing and filtering proccesses to create data for the visualisation of memory access 
 patterns through a user friendly GUI. At the moment:
 
--You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, 
-  Array (or Variable), Occurence Index and a Heat Map according to time of appearance.
-  
--You can visualise a specific 2x2 Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). 
-  Axis contain information about Row index, Col index, Occurence Index (y axis) and a Heat Map according to time of appearance.
-  
--You can visualise a 3x3 Array with i, j, k (z, x, y respectivly) on axis and a heat map on time of appearance. 
-  On 3x3 array visualisation we dont take in consideration occurrence index.
-  
+-You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, Array (or Variable), Occurrence Index and a Heat Map according to time of appearance.
+
+-You can visualise a specific 2x2 Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
+
+-You can visualise a 3x3 Array with i, j, k (z, x, y respectively) on axis and a heat map on time of appearance. On 3x3 array visualisation we do not take in consideration occurrence index.
+
 -Memory Activity Graph of operations (Store, Load and Modify) on a 2D plot, Y-axis contains Variables and X-axis Time.
 
 -Complete analysis with addresses and occurrences on GUI.
@@ -84,6 +81,10 @@ current tool but from gleipnir tool and there is nothing we can do to change the
 
 Also, gleipnir is a extremly slow and creates extremely big output files. For big programs you will need a strong machine and a lot 
 of time. (You can check how slow it is on mandelbrot.c on /tests/stack folder)
+
+## Acknowledgements
+Design and implementation of a tool for memory access
+pattern visualization, http://ir.lib.uth.gr/bitstream/handle/11615/48305/16578.pdf?sequence=1
 
 ## Random Examples
 ![alt text](https://i.ibb.co/Y7Kjqyg/Visualization-of-complete-execution-of-matrix-mul-with-blocks.png "Complete Run Execution")
