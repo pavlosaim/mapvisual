@@ -53,7 +53,7 @@ $ sudo make
 
 $ sudo make install
 
-Gleipnir should be installed in valgrind.
+Gleipnir should be installed in valgrind. Once you installed it, you should modify the file "valgrind_path" on folder "paths" of mapvisual src code, and set it to the installed valgrind path which contains gleipnir tool. 
 
 ## Run
 In order to run memory tracing through gleipnir you need to include in your source code gleipnir.h header file 
