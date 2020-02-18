@@ -75,12 +75,10 @@ There are some tests on tests/ folder. BE SURE to change the library include (on
 contributors machine. Once you change it, recompile the code.
 
 ## Bottlenecks
-Possible errors occuring on gleipnir cannot be avoided. One common error is "The impossible happened". Those errors are not from the
-current tool but from gleipnir tool and there is nothing we can do to change them. Some hints are, do not include system calls (avoid fclose)
-, printfs.
+Avoid including system calls inside Gleipnir's Pins (GL_START, GL_STOP). Probably even printf will not work.
 
-Also, gleipnir is a extremly slow and creates extremely big output files. For big programs you will need a strong machine and a lot 
-of time. (You can check how slow it is on mandelbrot.c on /tests/stack folder)
+Also, gleipnir is a slow tool and creates extremely large files. For big programs you will need a strong machine and a lot 
+of time. (mandelbrot.c on /tests/stack folder is a good example of a slow execution)
 
 ## Acknowledgements
 Design and implementation of a tool for memory access
