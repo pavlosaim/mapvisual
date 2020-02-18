@@ -6,9 +6,9 @@ patterns through a user friendly GUI. At the moment:
 
 -You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, Array (or Variable), Occurrence Index and a Heat Map according to time of appearance.
 
--You can visualise a specific 2x2 Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
+-You can visualise a specific 2D Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
 
--You can visualise a 3x3 Array with i, j, k (z, x, y respectively) on axis and a heat map on time of appearance. On 3x3 array visualisation we do not take in consideration occurrence index.
+-You can visualise a 3D Array with i, j, k (z, x, y respectively) on axis and a heat map on time of appearance. On 3x3 array visualisation we do not take in consideration occurrence index.
 
 -Memory Activity Graph of operations (Store, Load and Modify) on a 2D plot, Y-axis contains Variables and X-axis Time.
 
