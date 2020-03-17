@@ -12,7 +12,7 @@
   */
  #include <stdio.h>
  #include <math.h>
- #include "/home/pavlosaimoniotis/valgrind/gleipnir/gleipnir.h"
+ #include "/home/path/to/valgrind/gleipnir/gleipnir.h"
  int main()
  {
           /* screen ( integer) coordinate */

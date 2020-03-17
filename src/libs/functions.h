@@ -1,3 +1,8 @@
+/* Memory Access Pattern Visualization */
+// Author: Pavlos Aimoniotis
+////////////////////////////////////////
+// Headers of almost all filtering_functions.c
+
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 

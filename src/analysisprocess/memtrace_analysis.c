@@ -1,5 +1,12 @@
-#include "structs.h"
-#include "functions.h"
+/* Memory Access Pattern Visualization */
+// Author: Pavlos Aimoniotis
+////////////////////////////////////////
+// This file parses the code from memory tracing
+// output gleipnir format. Uses functions from 
+// filter folder.
+
+#include "../libs/functions.h"
+#include "../libs/structs.h"
 //Added by Pavlos Aimoniotis 11/10/2019. Used to keep information about Heap in order to create a lut record.
 int same_heap_address=0, heap_idx=0;
 //unsigned int heap_var_offset=0;
@@ -21,8 +28,6 @@ int main(int argc, char **argv) {
     printf("There was an error opening the tracefile!\n");
     return 1;
   }
-	strcpy(completepath,argv[2]); // Store path of source code directory. We need this variable in order to find the source code file, which may be in different directory
-													// than the executable file. It is an argument which user enters it from GUI
 	detect_allocated_info(tracefile);
   lut_file = fopen("lut_file","w+b");
   access_list = fopen("access_list","w+b");

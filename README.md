@@ -2,8 +2,9 @@
 Software for analysis and visualization of Memory Access Pattern (MAP)
 
 MAPvisual is a tool that creates and combines memory tracing and filtering proccesses to create data for the visualisation of memory access 
-patterns through a user friendly GUI. At the moment:
+patterns through a TCL shell. At the moment:
 
+<<<<<<< HEAD
 -You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, Array (or Variable), Occurrence Index and a Heat Map according to time of appearance.
 
 -You can visualise a specific 2D Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
@@ -11,8 +12,18 @@ patterns through a user friendly GUI. At the moment:
 -You can visualise a 3D Array with i, j, k (z, x, y respectively) on axis and a heat map on time of appearance. On 3x3 array visualisation we do not take in consideration occurrence index.
 
 -Memory Activity Graph of operations (Store, Load and Modify) on a 2D plot, Y-axis contains Variables and X-axis Time.
+=======
+-You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, 
+  Array (or Variable), Occurence Index and a Heat Map according to time of appearance.
+  
+-You can visualise a specific 2x2 Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). 
+  Axis contain information about Row index, Col index, Occurence Index (y axis) and a Heat Map according to time of appearance.
+  
+-You can visualise a 3x3 Array with i, j, k (z, x, y respectivly) on axis and a heat map on time of appearance. 
+  On 3x3 array visualisation we dont take in consideration occurrence index.
+>>>>>>> GUI completed deleted. A new TCL shell is now responsible to
 
--Complete analysis with addresses and occurrences on GUI.
+-Complete analysis with addresses and occurrences on saved format.
 
 ## Libraries
 You will need plotly, matplotlib, valgrind with gleipnir tool installed.
@@ -34,12 +45,13 @@ $ svn co svn://svn.valgrind.org/valgrind/trunk valgrind
 Clone gleipnir
 
 $ cd valgrind; git clone https://bitbucket.org/janjust/gleipnir-pub.git
+rename the folder from gleipnir-pub to gleipnir.
 
 (On current version as of 5/12/2019 you need to access glconf.sh and remove everything in comments)
 
-$ ./glconf -d
+$ ./glconf.sh -d
 
-$ ./glconf -m replace
+$ ./glconf.sh -m replace
 
 Back on valgrind folder. Edit Makefile.am and add gleipnir on TOOLS.
 
@@ -60,16 +72,13 @@ In order to run memory tracing through gleipnir you need to include in your sour
 before compiling (#include "/path/to/valgrind/gleipnir/gleipnir.h") and GL_START; and GL_STOP; as pins to the part of the code you want
 to analyse. For more information of how to run gleipnir visit this link https://csrl.cse.unt.edu/node/30
 
-Compile your source code. (map_analysis.py requires executable)
+Compile mapvis tool
+$ make all
 
-Once everything is done.
+run mapvis
+$ ./mapvis
 
-$ python map_analysis.py
-
-Open your executable, choose Stack or Heap analysis (IMPORTANT!!! If you dont select anything behaviour is unexpectable, even if it seems 
-to be checked, overwrite the check!). You will be asked for arguments and source path (try to type it as close as possible). Once 
-analysis is done you can choose visualization. For some visualizations you will be asked to know some information, like the name of the 
-array you want to visualize or each size. Its important for the developer to know this stuff.
+Be sure to check the help tcl command, to see the commands, how they work and a usual flow. Also there is a script as an example to get into the tool logic.
 
 There are some tests on tests/ folder. BE SURE to change the library include (on .c files) to your path to gleipnir. There is a path to 
 contributors machine. Once you change it, recompile the code.

@@ -1,20 +1,19 @@
-#include "structs.h"
-#include "functions.h"
+/* Memory Access Pattern Visualization */
+// Author: Pavlos Aimoniotis
+////////////////////////////////////////
+// In this file we try to collect data from 
+// memory tracking output file. Basically, 
+// the parsed file is scanned and important
+// information is classified in files.
 
-// In this file processing for the output files of memtrace is happening.	//
-// Mainly creates files that are used by map_analysis.py to create the output data	//
-// Like Variable Metrics, Memory Usage etc. //
-// Most of the variables are counted in map_analysis.py but the files that are parsed there are created here	//
+#include "../libs/functions.h"
+
 int main(int argc, char **argv) {
 
 	lut_record **lut;
  	lut=NULL;
  	unsigned int i;
  	output_pair read_pair;
-	char stackorheap; 
-
-
-	stackorheap = *(argv[1]);// By default S stands for Stack, H stands for Heap
 
  	read_pair.operation=0;
 	read_pair.index=0;	
@@ -63,7 +62,9 @@ int main(int argc, char **argv) {
 	int rd_exists_fl=0;
 	double std_dev;
 	int tmp_var=0;
-
+	char mem_alloc[2];
+	
+	strcpy(mem_alloc, argv[1]);
 	rd_bins=malloc(rd_bins_num*sizeof(rd_list_node));
 	rd_bins[0].index=0;
 	rd_bins[0].number_of_times=0;
@@ -168,7 +169,7 @@ int main(int argc, char **argv) {
 	/* Order data (order of appearance , address , variable name) */
 	for(i=0;i<pair_cnt;i++) {
 			// By default 1 stands for Stack, 2 stands for Heap
-			if (stackorheap == 'H'){
+			if (strcmp(mem_alloc, "H")==0){
 				if (lut[pair_array[i].index]->scope == 'H')
 					fprintf(order_out,"%d %s %c %s\n",order_of_access[i],lut[pair_array[i].index]->addr,pair_array[i].operation,lut[pair_array[i].index]->var_name);
 					#ifdef INFO

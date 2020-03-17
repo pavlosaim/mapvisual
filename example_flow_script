@@ -1,0 +1,9 @@
+set_path /home/to/my/executable
+set_src_path /home/to/source/file/c
+set_mem_alloc S
+set_valgrind_path /home/path/to/valgrind/bin/valgrind
+run_gleipnir
+memory_trace_analysis
+filtering_process
+complete_memory_access_pattern save
+2d_memory_access_pattern arrayname 10 4 save

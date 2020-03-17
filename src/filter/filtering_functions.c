@@ -1,6 +1,14 @@
-#include "structs.h"
+/* Memory Access Pattern Visualization */
+// Author: Pavlos Aimoniotis
+////////////////////////////////////////
+// In this file almost all of the 
+// functions, used for parsing and 
+// data collection, are implemented 
+// here.
+#include "../libs/structs.h"
 
 int foundpath=0;
+
 // Add a pair of operation and index on array of struct //
 output_pair * add_to_array(output_pair *array, char op, unsigned int idx) {
 
@@ -212,9 +220,9 @@ char * get_dyn_var_name(char * filename,int ln) {
 	}*/
 
 	/* Detect source code path	*/
-	sprintf(command , "rm paths/filepath; find %s -name %s>paths/filepath",completepath, filename);
+	sprintf(command , "rm src/paths/filepath; find %s -name %s>src/paths/filepath",completepath, filename);
 	system(command);
-	temp_file = fopen("paths/filepath", "r");
+	temp_file = fopen("src/paths/filepath", "r");
 	if(temp_file == NULL){
 		printf("Error: %d (%s)\n", errno, strerror(errno));
 		exit(1);         

@@ -1,6 +1,0 @@
-You will need the following libraries
-matplotlib
-plotly
-gleipnir
-Once you have installed them
->python map_analysis.py

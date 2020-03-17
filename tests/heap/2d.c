@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "/home/pavlosaimoniotis/valgrind/gleipnir/gleipnir.h"
+#include "/home/path/to/valgrind/gleipnir/gleipnir.h"
 
 #define N 32 
 

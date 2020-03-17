@@ -1,4 +1,4 @@
-#include "/home/pavlosaimoniotis/valgrind/gleipnir/gleipnir.h"
+#include "/home/path/to/valgrind/gleipnir/gleipnir.h"
 #include <stdio.h>
 int main(int argc, char *argv[]) {
     int matA[10][10]={{0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}, {0,1,2,3,4,5,6,7,8,9}};

@@ -1,11 +1,5 @@
 # memory-footprint-analysis
 
-This tool uses the Valgrind framework to run a memory trace of a given program and after processing that trace it outputs the following information:
-
-1. Memory Access Pattern, visualized with plotly.
+Memory Access Pattern, visualized with plotly.
     3D Graph, with axis, addresses, variables and occurence index of each variable.
     Nodes on graph, have a gradient color, showing their appearance on time.
-
-2. Memory activity graph
-
-3. Profiling information about the output files and execution time of the tool and it's functions.

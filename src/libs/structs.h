@@ -8,7 +8,9 @@
 #include <unistd.h>
 #include <errno.h>
 #include <math.h>
-
+#include "../tcl/tcl.h"
+#define CYN  "\x1B[36m"		// Cyan Color //
+#define NRM  "\x1B[0m"		// Normal Color //
 //#define INFO 1
 // Lookup table record structure //
 // Contains complete information about every access on memory	//
@@ -82,7 +84,11 @@ typedef struct  heap_accessed_info{
 
 heap_accessed_info heap[20]; //an array with all heap variables saved
 
-char completepath[1000];
+char completepath[2000]; // path to source directory. We need because src dir may be in different place than executable
+char executablepath[2000];
+char valgrindpath[2000];
+char arguments[2000];
+char stackorheap[2];
 int foundpath;
 //Addition end
 
