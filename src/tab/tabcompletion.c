@@ -10,7 +10,7 @@
 
 char *command_names[] = {
 		"load_exe",
-		"set_source_path",
+		"set_src_path",
 		"set_valgrind_path",
 		"run_gleipnir",
 		"set_arguments",
@@ -26,6 +26,7 @@ char *command_names[] = {
 		"helgrind",
 		"dhat",
 		"massif",
+		"memory_stats",
 		"help",
     NULL
 };

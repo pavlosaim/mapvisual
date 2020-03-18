@@ -106,7 +106,7 @@ int main (int argc , char * argv[])
 				{
 				  Tcl_DeleteInterp(interp);
 					//Add files to remove towards exit here
-					system("rm cache_out.txt -f;rm scatterplot_data.txt -f;rm lut_stats_data.txt -f;rm order_data.txt -f;rm additional_info.txt -f;rm stats.txt -f; rm gleipnir_out -f;rm tmp_path.txt -f;rm lut_file -f;rm access_list -f;rm alloc_info -f;");
+					system("rm cache_out.txt -f;rm memory_stats -f;rm order_data.txt -f;rm additional_info.txt -f;rm gleipnir_out -f;rm tmp_path.txt -f;rm lut_file -f;rm access_list -f;rm alloc_info -f;");
 					break;
 				}
 			else

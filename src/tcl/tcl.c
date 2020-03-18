@@ -107,7 +107,7 @@ int comRun_gleipnir(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj 
 	system(command);
 	printf(CYN"Command %s COMPLETED\n"NRM, command);
 	system("mv gleipnir.* gleipnir_out");
-	printf("Gleipnir output stored in gleipnir_out.\n");
+	printf(CYN"Gleipnir output stored in gleipnir_out.\n"NRM);
 	return TCL_OK;
 }
 
@@ -164,7 +164,7 @@ int comLackey(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST
 	}
 	printf("If lackey file exists, it will be removed.\n");
 	system("rm grindanalysis/lackey");
-	sprintf(command, "%s --tool=lackey --read-var-info=yes  --detailed-counts=yes --trace-mem=yes --log-file=grindanalysis/lackey %s %s ", valgrindpath, executablepath, arguments);
+	sprintf(command, "%s --tool=lackey --read-var-info=yes --detailed-counts=yes --trace-mem=yes --log-file=grindanalysis/lackey %s %s ", valgrindpath, executablepath, arguments);
 	printf(CYN"Executing: %s\n"NRM, command);
 	printf("This may take some time, please wait...\n");
 	system(command);
@@ -306,6 +306,7 @@ int comMemory_trace_analysis(ClientData clientData, Tcl_Interp *interp,int objc,
 	printf(CYN"This may take some time. Please wait...\n"NRM);
 	system(command);
 	printf(CYN"Command %s COMPLETED!\n"NRM, command);
+	system("cat additional_info.txt");	
 
 	return TCL_OK;
 }
@@ -325,7 +326,21 @@ int comFiltering_process(ClientData clientData, Tcl_Interp *interp,int objc, Tcl
 	system("ulimit -s unlimited");
 	system(command);
 	printf(CYN"Command %s COMPLETED!\n"NRM, command);
+	printf(CYN"See memory information by typing tcl command <memory_stats>\n"NRM);
 
+	return TCL_OK;
+}
+
+int comMemory_stats(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[2000];
+	if (objc != 1){
+		printf("Wrong number of arguments! Command <memory_stats> does not require arguments.\n");
+		printf("Make sure you have executed command <filtering_process>.\n");
+		return TCL_ERROR;
+	}
+	system("cat memory_stats");
 	return TCL_OK;
 }
 
@@ -457,7 +472,8 @@ int comClear_analysis(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Ob
 		return TCL_ERROR;
 	}
 
-	system("rm cache_out.txt -f;rm scatterplot_data.txt -f;rm lut_stats_data.txt -f;rm order_data.txt -f;rm additional_info.txt -f;rm stats.txt -f; rm gleipnir_out -f;rm tmp_path.txt -f;rm lut_file -f;rm access_list -f;rm alloc_info -f;");
+	system("rm cache_out.txt -f;rm memory_stats -f;rm order_data.txt -f;rm additional_info.txt -f;rm gleipnir_out -f;rm tmp_path.txt -f;rm lut_file -f;rm access_list -f;rm alloc_info -f;");
+	printf("Clear analysis completed.\n");
 	return TCL_OK;
 }
 int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
@@ -476,8 +492,10 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
   printf("set_valgrind_path <path>\tset path to valgrind executable (usually /home/yourpath/valgrind/bin/valgrind)\n");
   printf("set_arguments <args>\tset arguments for executable if needed\n");
   printf("set_mem_alloc <alloc>\tS for stack, H for heap, sets which memory allocations to analyse\n");
+  printf("run_gleipnir\truns memory tracking\n");
   printf("memory_trace_analysis\tanalysis memory tracking and produces files with information\n");
   printf("filtering_process\tfilters the output files of memory trace\n");
+  printf("memory_stats\tneeds filtering_process to have been completed. Shows memory usage stats\n");
   printf("complete_memory_access_pattern <save(optional)>\tmemory access pattern for the whole execution of the program\n");
   printf("2darray_memory_access_pattern <arrayname> <cols> <typeofbytes> <save(optional>\tvisualizes map of a given 2d array\n");
   printf("3darray_memory_access_pattern <arrayname> <cols> <depth> <typeofbytes> <save(optional>\t visualizes map of a given 3d array\n");
@@ -536,6 +554,7 @@ int tcladdition(Tcl_Interp * interp)
 	Tcl_CreateObjCommand(interp,"helgrind",comHelgrind,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"dhat",comDhat,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"massif",comMassif,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"memory_stats",comMemory_stats,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"help",comHelp,NULL,NULL);
 
 return 0;
