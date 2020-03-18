@@ -1,29 +1,19 @@
 # mapvisual
 Software for analysis and visualization of Memory Access Pattern (MAP)
 
-MAPvisual is a tool that creates and combines memory tracing and filtering proccesses to create data for the visualisation of memory access 
-patterns through a TCL shell. At the moment:
+MAPvisual is a tool that creates and combines memory tracing and filtering proccesses to create data for the visualisation of memory access  patterns through a TCL shell. At the moment:
 
-<<<<<<< HEAD
--You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, Array (or Variable), Occurrence Index and a Heat Map according to time of appearance.
+-You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, Array - Variables, Occurrence Indexes and a Heat Map according to time of appearance.
 
--You can visualise a specific 2D Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
+-You can visualise a specific 2D Array, and see it as inserted on a 3D plot, where every position is determined through (i, j). Axis contain information about Row index, Col index, Occurrence Index (y axis) and a Heat Map according to time of appearance.
 
--You can visualise a 3D Array with i, j, k (z, x, y respectively) on axis and a heat map on time of appearance. On 3x3 array visualisation we do not take in consideration occurrence index.
-
--Memory Activity Graph of operations (Store, Load and Modify) on a 2D plot, Y-axis contains Variables and X-axis Time.
-=======
--You can visualise the complete execution of the executable, and see it on a 3D plot, containing information about Addresses, 
-  Array (or Variable), Occurence Index and a Heat Map according to time of appearance.
-  
--You can visualise a specific 2x2 Array, and see it as inserted on a 3D plot, where every position is determined through (i, j) (or z, x). 
-  Axis contain information about Row index, Col index, Occurence Index (y axis) and a Heat Map according to time of appearance.
-  
--You can visualise a 3x3 Array with i, j, k (z, x, y respectivly) on axis and a heat map on time of appearance. 
-  On 3x3 array visualisation we dont take in consideration occurrence index.
->>>>>>> GUI completed deleted. A new TCL shell is now responsible to
+-You can visualise a 3D Array with rows, cols and depth on axis and a heat map on time of appearance. 
 
 -Complete analysis with addresses and occurrences on saved format.
+
+-Run valgrind plugin tools and save information.
+
+-User-friendly TCL Shell, which makes the tool easy to run.
 
 ## Libraries
 You will need plotly, matplotlib, valgrind with gleipnir tool installed.
@@ -82,8 +72,7 @@ $ ./mapvis
 
 Be sure to check the <help> tcl command, to see the commands, how they work and a usual flow. Also there is a script as an example to get into the tool logic.
 
-There are some tests on tests/ folder. BE SURE to change the library include (on .c files) to your path to gleipnir. There is a path to 
-contributors machine. Once you change it, recompile the code.
+There are some tests on tests/ folder. BE SURE to change the library included (on .c files) to your path to gleipnir.  
 
 ## Bottlenecks
 Avoid including system calls inside Gleipnir's Pins (GL_START, GL_STOP).
@@ -95,8 +84,9 @@ of time. (mandelbrot.c on /tests/stack folder is a good example of a slow execut
 Design and implementation of a tool for memory access
 pattern visualization, http://ir.lib.uth.gr/bitstream/handle/11615/48305/16578.pdf?sequence=1
 
-## Random Examples
+## Random Examples Pictures 
 ![alt text](https://i.ibb.co/Y7Kjqyg/Visualization-of-complete-execution-of-matrix-mul-with-blocks.png "Complete Run Execution")
 ![alt text](https://i.ibb.co/sJ9fCL7/Visualization-of-Y-array-in-matrix-mul-with-blocks.png "2D Array Vis")
 ![alt text](https://i.ibb.co/pd0QTtc/3-DARRAYVIS.png "3D Array Vis")
+
 
