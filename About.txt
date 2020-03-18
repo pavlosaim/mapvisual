@@ -1,5 +1,0 @@
-# memory-footprint-analysis
-
-Memory Access Pattern, visualized with plotly.
-    3D Graph, with axis, addresses, variables and occurence index of each variable.
-    Nodes on graph, have a gradient color, showing their appearance on time.

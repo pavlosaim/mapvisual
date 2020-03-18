@@ -33,10 +33,13 @@ int main (int argc , char * argv[])
 	char *text;
 	char *textexpansion;
 	char command[LINE_MAX];
+
+	strcpy(valgrindpath," ");
+	strcpy(executablepath," ");
 	strcpy(arguments," ");
 	strcpy(stackorheap,"S");
 	
-	printf(CYN"\nMemory Access Pattern Visualization is currently running!.\nType <help> for running flow and command explanation.\n"NRM);
+	printf(CYN"\nMemory Access Pattern Visualization is currently running!\nType <help> for running flow and command explanation.\n"NRM);
 	rl_completion_entry_function = NULL; // use rl_filename_completion_function(), the default filename completer //
 	rl_attempted_completion_function = command_completion;
 

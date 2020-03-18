@@ -18,7 +18,7 @@ int comSet_valgrind_path(ClientData clientData, Tcl_Interp *interp,int objc, Tcl
   if (objc != 2)
 		{
 			printf("Wrong number of arguments! Command <set_valgrind_path> requires as argument <pathtovalgrindexe>.\n");
-			printf("i.e.  set_path /home/path/to/my/valgrind/bin/valgrind\n");
+			printf("i.e.  set_valgrind_path /home/path/to/my/valgrind/bin/valgrind\n");
       Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
       return TCL_ERROR;
 		}
@@ -27,14 +27,14 @@ int comSet_valgrind_path(ClientData clientData, Tcl_Interp *interp,int objc, Tcl
 	printf(CYN"Valgrind path set to: %s\n"NRM, valgrindpath);
 	return TCL_OK;
 }
-int comSet_path(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+int comLoad_exe(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
 {
   const char syntax[] = "?<filename>";
 
   if (objc != 2)
 		{
-			printf("Wrong number of arguments! Command <set_path> requires as argument <pathtoexe>.\n");
-			printf("i.e.  set_path /home/path/to/my/executalefilename\n");
+			printf("Wrong number of arguments! Command <load_exe> requires as argument <pathtoexe>.\n");
+			printf("i.e.  load_exe /home/path/to/my/executalefilename\n");
       Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
       return TCL_ERROR;
 		}
@@ -87,10 +87,18 @@ int comRun_gleipnir(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj 
   if (objc != 1)
 		{
 			printf("Wrong number of arguments! Command <run_geipnir> does not require arguments.\n");
-			printf("Before running command, remember to set_valgrind_path, set_path, set_src_path.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe, set_src_path.\n");
       Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
       return TCL_ERROR;
 		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
 	printf("If gleipnir files exist, they will be removed.\n");
 	system("rm gleipnir.*");
 	sprintf(command, "%s --quiet --read-var-info=yes --read-debug=yes --tool=gleipnir %s %s", valgrindpath, executablepath, arguments);
@@ -103,6 +111,160 @@ int comRun_gleipnir(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj 
 	return TCL_OK;
 }
 
+int comCachegrind(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[5000];
+
+  if (objc != 1)
+		{
+			printf("Wrong number of arguments! Command <cachegrind> does not require arguments.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe.\n");
+      Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
+      return TCL_ERROR;
+		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
+	printf("If cachgrind file exists, it will be removed.\n");
+	system("rm grindanalysis/cachegrind");
+	sprintf(command, "%s --tool=cachegrind --read-var-info=yes --cachegrind-out-file=grindanalysis/cachegrind %s %s", valgrindpath, executablepath, arguments);
+	printf(CYN"Executing: %s\n"NRM, command);
+	printf("This may take some time, please wait...\n");
+	system(command);
+	printf(CYN"Command %s COMPLETED\n"NRM, command);
+	printf("Cachegrind output stored in grindanalysis/cachegrind.\n");
+	return TCL_OK;
+}
+
+int comLackey(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[5000];
+
+  if (objc != 1)
+		{
+			printf("Wrong number of arguments! Command <lackey> does not require arguments.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe.\n");
+      Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
+      return TCL_ERROR;
+		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
+	printf("If lackey file exists, it will be removed.\n");
+	system("rm grindanalysis/lackey");
+	sprintf(command, "%s --tool=lackey --read-var-info=yes  --detailed-counts=yes --trace-mem=yes --log-file=grindanalysis/lackey %s %s ", valgrindpath, executablepath, arguments);
+	printf(CYN"Executing: %s\n"NRM, command);
+	printf("This may take some time, please wait...\n");
+	system(command);
+	printf(CYN"Command %s COMPLETED\n"NRM, command);
+	printf("Lackey output stored in grindanalysis/lackey.\n");
+	return TCL_OK;
+}
+
+int comDhat(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[5000];
+
+  if (objc != 1)
+		{
+			printf("Wrong number of arguments! Command <lackey> does not require arguments.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe.\n");
+      Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
+      return TCL_ERROR;
+		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
+	printf("If dhat file exists, it will be removed.\n");
+	system("rm grindanalysis/dhat");
+	sprintf(command, "%s --tool=dhat --read-var-info=yes --log-file=grindanalysis/dhat %s %s ", valgrindpath, executablepath, arguments);
+	printf(CYN"Executing: %s\n"NRM, command);
+	printf("This may take some time, please wait...\n");
+	system(command);
+	printf(CYN"Command %s COMPLETED\n"NRM, command);
+	printf("Dhat output stored in grindanalysis/dhat.\n");
+	return TCL_OK;
+}
+
+int comMassif(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[5000];
+
+  if (objc != 1)
+		{
+			printf("Wrong number of arguments! Command <lackey> does not require arguments.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe.\n");
+      Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
+      return TCL_ERROR;
+		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
+	printf("If massif file exists, it will be removed.\n");
+	system("rm grindanalysis/massif");
+	sprintf(command, "%s --tool=massif --massif-out-file=grindanalysis/massif %s %s ", valgrindpath, executablepath, arguments);
+	printf(CYN"Executing: %s\n"NRM, command);
+	printf("This may take some time, please wait...\n");
+	system(command);
+	printf(CYN"Command %s COMPLETED\n"NRM, command);
+	printf("Massif output stored in grindanalysis/massif.\n");
+	return TCL_OK;
+}
+
+int comHelgrind(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
+{
+  const char syntax[] = "?<filename>";
+	char command[5000];
+
+  if (objc != 1)
+		{
+			printf("Wrong number of arguments! Command <helgrind> does not require arguments.\n");
+			printf("Before running command, remember to set_valgrind_path, load_exe.\n");
+      Tcl_WrongNumArgs(interp, 1, (Tcl_Obj * const *)objv, syntax);
+      return TCL_ERROR;
+		}
+	if (strcmp(valgrindpath, " ")==0){
+		printf("Path for valgrind has not been set, use <set_valgrind_path>!\n");
+      return TCL_ERROR;
+	}
+	if (strcmp(executablepath, " ")==0){
+		printf("Path for executable has not been set, use <load_exe>!\n");
+      return TCL_ERROR;
+	}
+	printf("If helgrind file exists, it will be removed.\n");
+	system("rm grindanalysis/helgrind");
+	sprintf(command, "%s --tool=helgrind --read-var-info=yes --log-file=grindanalysis/helgrind %s %s ", valgrindpath, executablepath, arguments);
+	printf(CYN"Executing: %s\n"NRM, command);
+	printf("This may take some time, please wait...\n");
+	system(command);
+	printf(CYN"Command %s COMPLETED\n"NRM, command);
+	printf("Helgrind output stored in grindanalysis/helgrind.\n");
+	return TCL_OK;
+}
 int comSet_mem_alloc(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST objv[])
 {
   const char syntax[] = "?<filename>";
@@ -309,7 +471,7 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
   }
 
   printf("\n\n// ******************** //\n");
-  printf("set_path <path>\tset path to executable file\n");
+  printf("load_exe <path>\tset path to executable file\n");
   printf("set_src_path <path>\tset path to source file directory\n");
   printf("set_valgrind_path <path>\tset path to valgrind executable (usually /home/yourpath/valgrind/bin/valgrind)\n");
   printf("set_arguments <args>\tset arguments for executable if needed\n");
@@ -323,14 +485,26 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
   printf("run_gleipnir\truns memory tracking\n");
 
   printf("\n\n\n");
+
+  printf("// ****Valgrind Tools***//\n");
+	printf("1. load_exe and set_valgrind_path\n");
+	printf("lackey\truns executable through lackey valgrind plugin\n");
+	printf("helgrind\truns executable through helgrind valgrind plugin\n");
+	printf("cachegrind\truns executable through cachegrind valgrind plugin\n");
+	printf("massif\truns executable through massif valgrind plugin\n");
+	printf("dhat\truns executable through dhat valgrind plugin\n");
+
+  printf("\n\n\n");
+
 	printf("use upper-lower arrows for history\n");
 	printf("use tab for auto-completion\n");
 	printf("use double-tab to see all commands\n");
+
   printf("\n\n\n");
 
   printf("// ******************* //");
   printf("###   Usual flow    ###");
-  printf("set_path\n");
+  printf("load_exe\n");
   printf("set_src_path\n");
   printf("set_valgrind_path\n");
   printf("set_arguments\n");
@@ -346,7 +520,7 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
 int tcladdition(Tcl_Interp * interp)
 {
 	Tcl_CreateObjCommand(interp,"set_valgrind_path",comSet_valgrind_path,NULL,NULL);
-	Tcl_CreateObjCommand(interp,"set_path",comSet_path,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"load_exe",comLoad_exe,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"set_src_path",comSet_src_path,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"set_arguments",comSet_arguments,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"run_gleipnir",comRun_gleipnir,NULL,NULL);
@@ -357,6 +531,11 @@ int tcladdition(Tcl_Interp * interp)
 	Tcl_CreateObjCommand(interp,"complete_memory_access_pattern",comComplete_memory_access_pattern,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"2darray_memory_access_pattern",com2darray_memory_access_pattern,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"3darray_memory_access_pattern",com3darray_memory_access_pattern,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"cachegrind",comCachegrind,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"lackey",comLackey,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"helgrind",comHelgrind,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"dhat",comDhat,NULL,NULL);
+	Tcl_CreateObjCommand(interp,"massif",comMassif,NULL,NULL);
 	Tcl_CreateObjCommand(interp,"help",comHelp,NULL,NULL);
 
 return 0;

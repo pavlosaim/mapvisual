@@ -65,7 +65,7 @@ $ sudo make
 
 $ sudo make install
 
-Gleipnir should be installed in valgrind. Once you installed it, you should modify the file "valgrind_path" on folder "paths" of mapvisual src code, and set it to the installed valgrind path which contains gleipnir tool. 
+Gleipnir should be installed in valgrind. 
 
 ## Run
 In order to run memory tracing through gleipnir you need to include in your source code gleipnir.h header file 
@@ -73,18 +73,20 @@ before compiling (#include "/path/to/valgrind/gleipnir/gleipnir.h") and GL_START
 to analyse. For more information of how to run gleipnir visit this link https://csrl.cse.unt.edu/node/30
 
 Compile mapvis tool
+
 $ make all
 
 run mapvis
+
 $ ./mapvis
 
-Be sure to check the help tcl command, to see the commands, how they work and a usual flow. Also there is a script as an example to get into the tool logic.
+Be sure to check the <help> tcl command, to see the commands, how they work and a usual flow. Also there is a script as an example to get into the tool logic.
 
 There are some tests on tests/ folder. BE SURE to change the library include (on .c files) to your path to gleipnir. There is a path to 
 contributors machine. Once you change it, recompile the code.
 
 ## Bottlenecks
-Avoid including system calls inside Gleipnir's Pins (GL_START, GL_STOP). Probably even printf will not work.
+Avoid including system calls inside Gleipnir's Pins (GL_START, GL_STOP).
 
 Also, gleipnir is a slow tool and creates extremely large files. For big programs you will need a strong machine and a lot 
 of time. (mandelbrot.c on /tests/stack folder is a good example of a slow execution)

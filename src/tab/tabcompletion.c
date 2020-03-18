@@ -9,7 +9,7 @@
 #include "tabcompletion.h"
 
 char *command_names[] = {
-		"set_path",
+		"load_exe",
 		"set_source_path",
 		"set_valgrind_path",
 		"run_gleipnir",
@@ -21,6 +21,11 @@ char *command_names[] = {
 		"complete_memory_access_pattern",
 		"2darray_memory_access_pattern",
 		"3darray_memory_access_pattern",
+		"cachegrind",
+		"lackey",
+		"helgrind",
+		"dhat",
+		"massif",
 		"help",
     NULL
 };
