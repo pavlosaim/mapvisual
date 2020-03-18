@@ -85,8 +85,9 @@ Design and implementation of a tool for memory access
 pattern visualization, http://ir.lib.uth.gr/bitstream/handle/11615/48305/16578.pdf?sequence=1
 
 ## Random Examples Pictures 
-![alt text](https://i.ibb.co/Y7Kjqyg/Visualization-of-complete-execution-of-matrix-mul-with-blocks.png "Complete Run Execution")
-![alt text](https://i.ibb.co/sJ9fCL7/Visualization-of-Y-array-in-matrix-mul-with-blocks.png "2D Array Vis")
-![alt text](https://i.ibb.co/pd0QTtc/3-DARRAYVIS.png "3D Array Vis")
-
-
+![alt text](https://i.ibb.co/WWcJZ8C/3dblockedsample.png "3d blocked mm sample")
+![alt text](https://i.ibb.co/rF51w7r/mandelbrotsample.png "mandelbrot part sample")
+![alt text](https://i.ibb.co/n7sLjqx/matrixcolyarraysample.png "random column y")
+![alt text](https://i.ibb.co/Y2bQ25C/perarraymapsample.png "per array sample")
+![alt text](https://i.ibb.co/NWk0KYP/3dtangledsample.png "3d tangled sample")
+![alt text](https://i.ibb.co/rMBbD44/3darrsample.png "3d array sample")
