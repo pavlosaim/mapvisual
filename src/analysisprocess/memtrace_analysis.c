@@ -19,6 +19,9 @@ double f_res;
 output_pair read_pair;
 FILE *access_list_file, *file_lut, *lut_file = NULL, *access_list = NULL, *tracefile, *addition_info_file;
 
+strcpy(completepath, argv[2]); // some executables tend to be missing completepath which is a global variable till this point, for unknown reason and i did not manage to find out.
+															// completepath comes as argument and gets back in its variable. Engineering things...
+
 tracefile = fopen(argv[1], "r");  
 if(tracefile == NULL) {
 	printf("There was an error opening the tracefile!\n");

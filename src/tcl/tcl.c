@@ -301,7 +301,7 @@ int comMemory_trace_analysis(ClientData clientData, Tcl_Interp *interp,int objc,
 		printf("Make sure you first <run_gleipnir>.\n");
 		return TCL_ERROR;
 	}
-	sprintf(command, "src/analysisprocess/memtrace_analysis gleipnir_out");
+	sprintf(command, "src/analysisprocess/memtrace_analysis gleipnir_out %s", completepath);
 	printf(CYN"Executing: %s\n"NRM, command);
 	printf(CYN"This may take some time. Please wait...\n"NRM);
 	system(command);
