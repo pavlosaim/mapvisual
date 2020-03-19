@@ -102,7 +102,6 @@ fclose(lut_stats_out);
 order_out=fopen("order_data.txt","w");
 /* Order data (order of appearance , address , variable name) */
 for(i=0;i<pair_cnt;i++) {
-		// By default 1 stands for Stack, 2 stands for Heap
 		if (strcmp(mem_alloc, "H")==0){
 			if (lut[pair_array[i].index]->scope == 'H')
 				fprintf(order_out,"%d %s %c %s\n",order_of_access[i],lut[pair_array[i].index]->addr,pair_array[i].operation,lut[pair_array[i].index]->var_name);

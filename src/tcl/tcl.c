@@ -520,8 +520,8 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
 
   printf("\n\n\n");
 
-  printf("// ******************* //");
-  printf("###   Usual flow    ###");
+  printf("// ******************* //\n");
+  printf("###   flow example   ###\n");
   printf("load_exe\n");
   printf("set_src_path\n");
   printf("set_valgrind_path\n");
@@ -530,7 +530,7 @@ int comHelp(ClientData clientData, Tcl_Interp *interp,int objc, Tcl_Obj *CONST o
   printf("run_gleipnir\n");
   printf("memory_trace_analysis\n");
   printf("filtering_process\n");
-  printf("Visualizations - complete_memory_access_pattern\n");
+  printf("complete_memory_access_pattern\n");
 
 	return TCL_OK;
 }

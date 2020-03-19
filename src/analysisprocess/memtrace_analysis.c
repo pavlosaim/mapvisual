@@ -7,10 +7,6 @@
 
 #include "../libs/functions.h"
 #include "../libs/structs.h"
-//Added by Pavlos Aimoniotis 11/10/2019. Used to keep information about Heap in order to create a lut record.
-int same_heap_address=0, heap_idx=0;
-//unsigned int heap_var_offset=0;
-
 
 int main(int argc, char **argv) {
 
