@@ -40,7 +40,12 @@ total_accesses = [];
 count = 0;
 # Parse order_data file
 for line in order_data_file:
+    #see output_processing for order of line
     val1,str1,char1,str2 = line.strip().split()
+
+    #zzq_args should not be printed
+    if ("_zzq_args" == str2):
+        continue
     lut_indices.append(val1)
     addresses.append(str1)
     operations.append(char1)

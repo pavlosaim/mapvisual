@@ -12,6 +12,11 @@ int main(int argc, char **argv) {
 
 lut_record **lut;
 unsigned int i;
+unsigned int *appearance_cnt;// Appearance counter for every record
+unsigned int *order_of_access;				// Order of accesses
+unsigned int pos;									// Matching index of pairs to lut records
+unsigned int *mem_usage_s;		// Stored bytes
+unsigned int *mem_usage_l;		// Loaded bytes
 output_pair read_pair;
 FILE *access_file, *lut_file, *additional_info_file, *lut_stats_out, *order_out;
 char mem_alloc[2];
@@ -48,12 +53,10 @@ fclose(additional_info_file);
 fclose(lut_file);
 fclose(access_file);
 
-
-unsigned int appearance_cnt[global_record_idx];		// Appearance counter for every record
-unsigned int order_of_access[pair_cnt];				// Order of accesses
-unsigned int pos;									// Matching index of pairs to lut records
-unsigned int mem_usage_s[global_record_idx];		// Stored bytes
-unsigned int mem_usage_l[global_record_idx];		// Loaded bytes
+appearance_cnt = (unsigned int *)malloc(global_record_idx * sizeof(unsigned int));
+order_of_access = (unsigned int *)malloc(pair_cnt * sizeof(unsigned int));
+mem_usage_s = (unsigned int *)malloc(global_record_idx * sizeof(unsigned int));
+mem_usage_l = (unsigned int *)malloc(global_record_idx * sizeof(unsigned int));
 
 for(i=0;i<global_record_idx;i++) {
 	appearance_cnt[i]=0;
@@ -83,7 +86,6 @@ for(i=0;i<pair_cnt;i++) {
 	}
 
 }
-
 
 lut_stats_out=fopen("memory_stats","w");
 
@@ -121,6 +123,10 @@ for(i=0;i<pair_cnt;i++) {
 fclose(order_out);
 free_lut(lut);
 free(pair_array);
+free(appearance_cnt);
+free(mem_usage_s);
+free(mem_usage_l);
+free(order_of_access);
 return 0;
 
 }

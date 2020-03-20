@@ -23,7 +23,7 @@ typedef struct lut_record {
   int m_size;                                         // Memory size
   unsigned int thread_id;                             // Thread id
   char var_name[100];                                 // Variable name
-  char func_name[1024];                               // Function name
+//  char func_name[1024];                               // Function name
   char scope;                                         // Variable scope (G/S/H/M)
   char var_type;                                      // 2nd variable scope (G/L/H)
   char var_type2;                                     // Variable type (S/V)
@@ -42,8 +42,8 @@ typedef struct record_line {
   int mem_size;                                       // Memory size
   unsigned int thread_id;                             // Thread id
   char var_scope;                                     // Variable scope (G/S/H/M)
-  char shoname[1024];                                 // Shared object name
-  char fn_nm[1024];                                   // Function name
+//  char shoname[1024];                                 // Shared object name
+//  char fn_nm[1024];                                   // Function name
   char var_scope2;                                    // 2nd variable scope (G/L/H)
   char var_type;                                      // Variable type (S/V)
   char filename[1024];                                // Filename (dynamic memory)

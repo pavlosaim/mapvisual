@@ -34,10 +34,13 @@ $ svn co svn://svn.valgrind.org/valgrind/trunk valgrind
 
 Clone gleipnir
 
-$ cd valgrind; git clone https://bitbucket.org/janjust/gleipnir-pub.git
-rename the folder from gleipnir-pub to gleipnir.
+$ cd valgrind; 
 
-(On current version as of 5/12/2019 you need to access glconf.sh and remove everything in comments)
+for mapvisual a new version of optimized gleipnir (specific for this application) will be needed.
+
+$ git clone https://github.com/pavlosaim/memory-tracing.git
+
+rename the folder to gleipnir. Use that repository to install gleipnir and valgrind. If not continue with the following.
 
 $ ./glconf.sh -d
 

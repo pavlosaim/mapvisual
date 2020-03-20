@@ -79,7 +79,7 @@ lut_record **add_lut_record(lut_record **table, lut_record record) {
 	tmp_record->m_size = 0;
 	tmp_record->thread_id = 0;
 	memset(&tmp_record->var_name[0], 0, sizeof(tmp_record->var_name));
-	memset(&tmp_record->func_name[0], 0, sizeof(tmp_record->func_name));
+//	memset(&tmp_record->func_name[0], 0, sizeof(tmp_record->func_name));
 	tmp_record->scope = 0;
 	tmp_record->var_type = 0;
 	tmp_record->var_type2 = 0;
@@ -94,7 +94,7 @@ lut_record **add_lut_record(lut_record **table, lut_record record) {
 	tmp_record->m_size = record.m_size;
 	tmp_record->thread_id = record.thread_id;
 	strcpy(tmp_record->var_name, record.var_name);
-	strcpy(tmp_record->func_name, record.func_name);
+//	strcpy(tmp_record->func_name, record.func_name);
 	tmp_record->scope = record.scope;
 	tmp_record->var_type = record.var_type;
 	tmp_record->var_type2 = record.var_type2;
@@ -139,10 +139,10 @@ lut_record ** create_lut_record(lut_record **table, record_line line, FILE *fp){
 
   memset(&tmp_record->addr[0], 0, sizeof(tmp_record->addr));
   memset(&tmp_record->var_name[0], 0, sizeof(tmp_record->var_name));
-  memset(&tmp_record->func_name[0], 0, sizeof(tmp_record->func_name));
+//  memset(&tmp_record->func_name[0], 0, sizeof(tmp_record->func_name));
 	strcpy(tmp_record->addr, line.address);
 	strcpy(tmp_record->var_name, line.var_name);
-  strcpy(tmp_record->func_name, line.fn_nm);
+  //strcpy(tmp_record->func_name, line.fn_nm);
   tmp_record->m_size = line.mem_size;
   tmp_record->thread_id = line.thread_id;
   tmp_record->scope = line.var_scope;
@@ -200,8 +200,8 @@ int check_lut_table(lut_record **table,record_line line){
 										}
 									if ((line.var_scope == 'S') && (line.var_scope2 == table[ui]->var_type)) 
 										{
-											if (strcmp(line.fn_nm, table[ui]->func_name) == 0) 
-												{
+											//if (strcmp(line.fn_nm, table[ui]->func_name) == 0) 
+												//{
 													if (!strcmp(line.address, table[ui]->addr)) 
 														{
 															duplicate_fl = ui;
@@ -210,7 +210,7 @@ int check_lut_table(lut_record **table,record_line line){
 																	zero_match_fl = 1;
 																}
 														}
-												}
+												//}
 										}
 								}
 						}
@@ -226,7 +226,7 @@ void print_lut_record(lut_record *ptr) {
   printf("Memory size: %d\n",ptr->m_size);
   printf("Thread id: %d\n",ptr->thread_id);
   printf("Variable name: %s\n",ptr->var_name);
-  printf("Function name: %s\n",ptr->func_name);
+  //printf("Function name: %s\n",ptr->func_name);
   printf("Variable scope: %c\n",ptr->scope);
 
   if((ptr->scope=='G') || ptr->scope=='L') 
@@ -337,8 +337,8 @@ record_line validate_line(char buffer[1024]){
 
   /* Initialization */
   memset(&temp.address[0], 0, sizeof(temp.address));
-  memset(&temp.shoname[0], 0, sizeof(temp.shoname));
-  memset(&temp.fn_nm[0], 0, sizeof(temp.fn_nm));
+//  memset(&temp.shoname[0], 0, sizeof(temp.shoname));
+  //memset(&temp.fn_nm[0], 0, sizeof(temp.fn_nm));
   memset(&temp.filename[0], 0, sizeof(temp.filename));
   memset(&temp.var_name[0], 0, sizeof(temp.var_name));
   memset(&temp.member[0], 0, sizeof(temp.member));
@@ -413,15 +413,13 @@ record_line validate_line(char buffer[1024]){
       buffer_idx++;
     }
 
+		/*
+		 
     l=buffer_idx;
     for (; buffer[buffer_idx] != ':'; buffer_idx++) {    
        temp.shoname[buffer_idx-l] = buffer[buffer_idx]; // Shared object name
      }
     temp.shoname[l]='\0';
-
-    if (strcmp(temp.shoname, "NONE")) {
-      temp.invalid_line = 1;
-    }
 
     buffer_idx = buffer_idx + 2;
 
@@ -450,14 +448,16 @@ record_line validate_line(char buffer[1024]){
 			temp.fn_nm[l - buffer_idx] = ')';
 			temp.fn_nm[l - buffer_idx + 1] = '\0';
 			buffer_idx = l + 1;
-		};
-
+		}
+	
     while(!isspace(buffer[buffer_idx])) {// Adjusting index
       buffer_idx++;
     }
     while(isspace(buffer[buffer_idx])) {// Adjusting index
       buffer_idx++;
     }
+
+		*/
 
     if((buffer[buffer_idx]==' ') || (buffer[buffer_idx]=='\0') || (buffer[buffer_idx]=='\n')) {
       temp.invalid_line=1;// If the line has no more data past this point it is invalid
@@ -470,8 +470,6 @@ record_line validate_line(char buffer[1024]){
 			buffer_idx++;
 			buffer_idx++;
 		}
-
-
     if(fl == 1 && temp.invalid_line == 0) {// fl==1 when the variable scope is H 
       temp.var_scope2 = buffer[buffer_idx];// 2nd Variable scope 
       temp.var_type = '-';// Variable type
