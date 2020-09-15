@@ -52,7 +52,7 @@ Then on valgrind
 
 $ ./autogen.sh
 
-$ ./configure --prefix=<current valgrind dir>
+$ ./configure --prefix= current_valgrind_dir
 
 $ sudo make
 
